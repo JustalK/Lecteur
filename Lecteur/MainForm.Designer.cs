@@ -9,6 +9,9 @@
  
 using System.IO;
 using System.Diagnostics;
+using System.Media;
+using Lecteur;
+using WMPLib;
 namespace Lecteur
 {
 	partial class MainForm
@@ -19,7 +22,8 @@ namespace Lecteur
 		private System.ComponentModel.IContainer components = null;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
-		
+		private System.Windows.Forms.Label label3;
+
 		/// <summary>
 		/// Disposes resources used by the form.
 		/// </summary>
@@ -33,6 +37,20 @@ namespace Lecteur
 			}
 			base.Dispose(disposing);
 		}
+
+		void Label3MouseHover(object sender, System.EventArgs e)
+		{
+			this.label3.BackColor = System.Drawing.Color.Blue;
+		}
+		
+		void Label3MouseLeave(object sender, System.EventArgs e)
+		{
+			this.label3.BackColor = System.Drawing.Color.Red;
+			WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
+
+			wplayer.URL = "fx2.mp3";
+			wplayer.controls.play();
+		}
 		
 		/// <summary>
 		/// This method is required for Windows Forms designer support.
@@ -43,6 +61,7 @@ namespace Lecteur
 		{
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -62,11 +81,26 @@ namespace Lecteur
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Justal \"Latsuj\" K.";
 			// 
+			// label3
+			// 
+			this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.label3.Location = new System.Drawing.Point(2, 2);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(580, 51);
+			this.label3.TabIndex = 3;
+			this.label3.Text = "label3";
+			this.label3.BackColor = System.Drawing.Color.Red;
+			this.label3.MouseHover += new System.EventHandler(this.Label3MouseHover);
+			this.label3.MouseLeave += new System.EventHandler(this.Label3MouseLeave);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.SystemColors.Control;
+			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.ClientSize = new System.Drawing.Size(584, 466);
+			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -75,28 +109,7 @@ namespace Lecteur
 			this.Name = "MainForm";
 			this.Text = "Lecteur";
 			this.ResumeLayout(false);
-			
-			string[] array1 = Directory.GetFiles(@"C:\");
-		
-			var position = 0;
-			foreach (string name in array1)
-			{
-				var labeltmp = new System.Windows.Forms.Label();
-				labeltmp.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-				labeltmp.Location = new System.Drawing.Point(10, 12+position);
-				labeltmp.AutoSize = true;
-				labeltmp.Text = name;
-				Debug.WriteLine(name+" "+position);
-				position+=40;
-				var linetmp = new System.Windows.Forms.Label();
-				linetmp.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-				linetmp.Location = new System.Drawing.Point(0, position);
-				linetmp.Name = "label1";
-				linetmp.Size = new System.Drawing.Size(600, 2);
-				linetmp.TabIndex = 0;			
-				this.Controls.Add(labeltmp); 	
-				this.Controls.Add(linetmp); 
-			}
+
 		}
 	}
 }

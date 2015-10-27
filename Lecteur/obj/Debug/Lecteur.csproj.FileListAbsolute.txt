@@ -6,3 +6,6 @@ C:\Users\Latsuj\Documents\SharpDevelop Projects\Lecteur\Lecteur\obj\Debug\Lecteu
 C:\Users\Latsuj\Documents\SharpDevelop Projects\Lecteur\Lecteur\obj\Debug\Lecteur.pdb
 C:\Users\Latsuj\Documents\SharpDevelop Projects\Lecteur\Lecteur\obj\Debug\Lecteur.MainForm.resources
 C:\Users\Latsuj\Documents\SharpDevelop Projects\Lecteur\Lecteur\obj\Debug\Lecteur.csproj.GenerateResource.Cache
+C:\Users\Latsuj\Documents\SharpDevelop Projects\Lecteur\Lecteur\obj\Debug\Interop.WMPLib.dll
+C:\Users\Latsuj\Documents\SharpDevelop Projects\Lecteur\Lecteur\obj\Debug\Lecteur.csproj.ResolveComReference.cache
+C:\Users\Latsuj\Documents\SharpDevelop Projects\Lecteur\Lecteur\bin\Debug\Interop.WMPLib.dll
