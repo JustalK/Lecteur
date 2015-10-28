@@ -10,8 +10,12 @@
 using System.IO;
 using System.Diagnostics;
 using System.Media;
+using System.Collections;
+using System;
 using Lecteur;
 using WMPLib;
+using System.Collections.Generic;
+using System.Linq;
 namespace Lecteur
 {
 	partial class MainForm
@@ -27,7 +31,15 @@ namespace Lecteur
 		private int statePlayer;
 		private System.ComponentModel.ComponentResourceManager rsc = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 		private string[] files;
+		private List<string> selected = new List<string>();
 		private int positionY = 2;
+		private int count = 0;
+		private string objectCount;
+		private int currentPlay;
+		private System.Windows.Forms.Label objectButton;
+		private System.Windows.Forms.Label objectSong;
+		private System.Windows.Forms.Label objectTitle;
+		
 		/// <summary>
 		/// Disposes resources used by the form.
 		/// </summary>
@@ -72,73 +84,61 @@ namespace Lecteur
 		
 		void Label3MouseLeave(object sender, System.EventArgs e)
 		{
-
-		}
-		
-		void wplayer_PlayStateChange(int NewState)
-		{
-			statePlayer = NewState;
-			switch (NewState)
-			{
-			    case (int)WMPLib.WMPPlayState.wmppsMediaEnded:
-					LayerColoredOff();
-			        Debug.WriteLine("End");
-			        break;
-			    case (int)WMPLib.WMPPlayState.wmppsPlaying:
-			        Debug.WriteLine("Playing");
-			        break;
-			    default:
-			        break;
-			}
-
+			
 		}
 		
 		private void searchMP3() {
 			// Search in the current directory the mp3 files
 			files = Directory.GetFiles(@"./", "*.mp3");
+			int cpt = 0;
 			foreach (string str in files)
 			{
-			    Debug.WriteLine("{0} ", str);
+				addMP3(cpt);
+				cpt++;
 			}
 		}
 		
-		private void addMP3() {
+		private void addMP3(int cpt) {
 			System.Windows.Forms.Label mp3_song = new System.Windows.Forms.Label();
 			System.Windows.Forms.Label button_play = new System.Windows.Forms.Label();
 			System.Windows.Forms.Label mp3_title = new System.Windows.Forms.Label();
 			
+			
+			mp3_title.Name = "title_"+count;
 			mp3_title.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 									| System.Windows.Forms.AnchorStyles.Left) 
 									| System.Windows.Forms.AnchorStyles.Right)));
-			mp3_title.BackColor = System.Drawing.Color.Gray;
+			mp3_title.BackColor = System.Drawing.SystemColors.ButtonShadow;	
 			mp3_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-			mp3_title.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+			mp3_title.ForeColor = System.Drawing.Color.Black;
 			mp3_title.Location = new System.Drawing.Point(12, 2+this.positionY);
 			mp3_title.MinimumSize = new System.Drawing.Size(416, 45);
 			mp3_title.MaximumSize = new System.Drawing.Size(416, 45);
-			mp3_title.Text = "Title.mp3";
+			mp3_title.Text = Path.GetFileName(files[cpt]);
 			mp3_title.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			mp3_title.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Label3MouseUp);
+			mp3_title.Click += new System.EventHandler(this.selectedClick);
 			this.Controls.Add(mp3_title);				
 			
-			button_play.BackColor = System.Drawing.Color.Gray;
+			button_play.Name = "button_"+count;
+			button_play.BackColor = System.Drawing.SystemColors.ButtonShadow;	
 			button_play.Image = ((System.Drawing.Image)(rsc.GetObject("play")));
 			button_play.Location = new System.Drawing.Point(530, this.positionY+1);
-			button_play.MinimumSize = new System.Drawing.Size(48, 49);
-			button_play.MaximumSize = new System.Drawing.Size(48, 49);
-			button_play.Click += new System.EventHandler(this.Label5Click);
+			button_play.MinimumSize = new System.Drawing.Size(40, 49);
+			button_play.MaximumSize = new System.Drawing.Size(40, 49);
+			button_play.Click += new System.EventHandler(this.playClick);
 			this.Controls.Add(button_play);	
 			
-			mp3_song.BackColor = System.Drawing.Color.Gray;
+			mp3_song.Name = "song_"+count;
+			mp3_song.BackColor = System.Drawing.SystemColors.ButtonShadow;	
 			mp3_song.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			mp3_song.Location = new System.Drawing.Point(2, this.positionY);
 			mp3_song.MinimumSize = new System.Drawing.Size(580, 51);
 			mp3_song.MaximumSize = new System.Drawing.Size(580, 51);
-			mp3_song.MouseHover += new System.EventHandler(this.Label3MouseHover);
-			mp3_song.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Label3MouseUp);	
+			mp3_song.Click += new System.EventHandler(this.selectedClick);
 			this.Controls.Add(mp3_song);	
 			
 			this.positionY += 55;
+			count++;
 		}
 		
 		/// <summary>
@@ -196,15 +196,110 @@ namespace Lecteur
 		}
 		private System.Windows.Forms.Label pause;
 		
-		void Label5Click(object sender, System.EventArgs e)
+		void playClick(object sender, System.EventArgs e)
 		{
-			if(statePlayer!=(int)WMPLib.WMPPlayState.wmppsPlaying) {
-				this.wplayer = new WMPLib.WindowsMediaPlayer();
-				LayerColoredOn();
-				this.wplayer.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(wplayer_PlayStateChange);
-				this.wplayer.URL = "./fx2.mp3";
-				this.wplayer.controls.play();
-			}			
+			string name = ((System.Windows.Forms.Label)sender).Name;
+			System.Windows.Forms.Label ctn = (System.Windows.Forms.Label)this.Controls[name];
+			char[] delimiterChars = {'_'};
+			this.objectCount = name.Split(delimiterChars)[1];
+			
+			if(statePlayer==(int)WMPLib.WMPPlayState.wmppsPlaying) {
+				this.objectButton.Image = ((System.Drawing.Image)(rsc.GetObject("play")));
+				this.wplayer.controls.stop();
+			}				
+			this.objectButton = (System.Windows.Forms.Label)this.Controls["button_"+objectCount];
+			this.objectButton.Image = ((System.Drawing.Image)(rsc.GetObject("pause")));	
+			if(!selected.Contains(this.objectCount)) {
+				selected.Add(this.objectCount);
+				this.objectTitle = (System.Windows.Forms.Label)this.Controls["title_"+objectCount];
+				this.objectSong = (System.Windows.Forms.Label)this.Controls["song_"+objectCount];
+				this.objectButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+				this.objectTitle.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+				this.objectSong.BackColor = System.Drawing.SystemColors.ButtonHighlight;			
+			} 
+			this.currentPlay = this.selected.IndexOf(this.objectCount);
+			play(currentPlay);
 		}
+
+		private void play(int id) {
+			this.wplayer = new WMPLib.WindowsMediaPlayer();
+			this.wplayer.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(wplayer_PlayStateChange);
+			this.wplayer.URL = files[id];
+			Debug.WriteLine(currentPlay);
+			this.wplayer.controls.play();			
+		}
+		
+		void selectedClick(object sender, System.EventArgs e)
+		{
+					Debug.WriteLine("azea");
+			string name = ((System.Windows.Forms.Label)sender).Name;
+			System.Windows.Forms.Label ctn = (System.Windows.Forms.Label)this.Controls[name];
+			char[] delimiterChars = {'_'};
+			string tmp = name.Split(delimiterChars)[1];
+			
+			if(!selected.Contains(tmp)) {
+				selected.Add(name.Split(delimiterChars)[1]);
+				this.objectButton = (System.Windows.Forms.Label)this.Controls["button_"+tmp];
+				this.objectTitle = (System.Windows.Forms.Label)this.Controls["title_"+tmp];
+				this.objectSong = (System.Windows.Forms.Label)this.Controls["song_"+tmp];
+				this.objectButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+				this.objectTitle.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+				this.objectSong.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+			} else {
+				Debug.WriteLine(this.currentPlay);
+					Debug.WriteLine(":: "+this.selected.Count());
+				if((this.selected.IndexOf(this.objectCount)>this.selected.IndexOf(tmp)) || (this.currentPlay>=this.selected.Count()-1)) {
+					this.currentPlay-=1;
+					Debug.WriteLine("azeazeae");
+				}
+				selected.Remove(tmp);
+				this.objectButton = (System.Windows.Forms.Label)this.Controls["button_"+tmp];
+				this.objectTitle = (System.Windows.Forms.Label)this.Controls["title_"+tmp];
+				this.objectSong = (System.Windows.Forms.Label)this.Controls["song_"+tmp];
+				this.objectButton.BackColor = System.Drawing.SystemColors.ButtonShadow;	
+				this.objectTitle.BackColor = System.Drawing.SystemColors.ButtonShadow;	
+				this.objectSong.BackColor = System.Drawing.SystemColors.ButtonShadow;					
+			}
+					Debug.WriteLine("azea");
+		}
+		
+		void nextPlay() {
+			this.currentPlay+=1;
+			if(this.selected.Any()) {
+				if(this.currentPlay<this.selected.Count()) {
+					this.objectButton = (System.Windows.Forms.Label)this.Controls["button_"+this.selected.ElementAt(this.currentPlay)];
+					play(this.currentPlay);
+				} else {
+					this.currentPlay = 0;
+					this.objectButton = (System.Windows.Forms.Label)this.Controls["button_"+this.selected.ElementAt(this.currentPlay)];
+					play(0);
+				}
+			}
+		}
+		
+		void wplayer_PlayStateChange(int NewState)
+		{
+			statePlayer = NewState;
+			switch (NewState)
+			{
+			    case (int)WMPLib.WMPPlayState.wmppsMediaEnded:
+					Debug.WriteLine(":: "+this.currentPlay);
+					Debug.WriteLine(":: "+this.selected.Count());
+					Debug.WriteLine(":: "+this.selected.ElementAt(this.currentPlay));
+					this.objectButton = (System.Windows.Forms.Label)this.Controls["button_"+this.selected.ElementAt(this.currentPlay)];
+					this.objectButton.Image = ((System.Drawing.Image)(rsc.GetObject("play")));
+					nextPlay();
+			        break;
+			    case (int)WMPLib.WMPPlayState.wmppsPlaying:
+					this.objectButton = (System.Windows.Forms.Label)this.Controls["button_"+this.selected.ElementAt(this.currentPlay)];
+					this.objectButton.Image = ((System.Drawing.Image)(rsc.GetObject("pause")));
+			        break;
+			    default:
+			        break;
+			}
+
+		}
+		
+
 	}
 }

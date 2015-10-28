@@ -25,14 +25,6 @@ namespace Lecteur
 			//
 			InitializeComponent();
 			searchMP3();
-			addMP3();
-			addMP3();
-			addMP3();
-			addMP3();
-			addMP3();
-			addMP3();
-			addMP3();
-			addMP3();
 			
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
