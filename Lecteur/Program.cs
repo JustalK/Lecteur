@@ -23,7 +23,10 @@ namespace Lecteur
 		{				
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
+			MainForm mf = new MainForm();
+			Player player = new Player(mf);
+			player.createMusicsList();
+			Application.Run(mf);
 		}
 		
 	}

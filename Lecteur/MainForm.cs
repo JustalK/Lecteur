@@ -20,15 +20,7 @@ namespace Lecteur
 	{
 		public MainForm()
 		{
-			//
-			// The InitializeComponent() call is required for Windows Forms designer support.
-			//
 			InitializeComponent();
-			searchMP3();
-			
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
 		}
 	}
 }
