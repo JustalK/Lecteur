@@ -9,3 +9,14 @@ C:\Users\Latsuj\Documents\SharpDevelop Projects\Lecteur\Lecteur\obj\Debug\Lecteu
 C:\Users\Latsuj\Documents\SharpDevelop Projects\Lecteur\Lecteur\obj\Debug\Interop.WMPLib.dll
 C:\Users\Latsuj\Documents\SharpDevelop Projects\Lecteur\Lecteur\obj\Debug\Lecteur.csproj.ResolveComReference.cache
 C:\Users\Latsuj\Documents\SharpDevelop Projects\Lecteur\Lecteur\bin\Debug\Interop.WMPLib.dll
+C:\Users\Latsuj\Documents\Lecteur\Lecteur\obj\Debug\Lecteur.csprojResolveAssemblyReference.cache
+C:\Users\Latsuj\Documents\Lecteur\Lecteur\obj\Debug\Lecteur.exe
+C:\Users\Latsuj\Documents\Lecteur\Lecteur\obj\Debug\Lecteur.pdb
+C:\Users\Latsuj\Documents\Lecteur\Lecteur\bin\Debug\Lecteur.exe.config
+C:\Users\Latsuj\Documents\Lecteur\Lecteur\bin\Debug\Lecteur.exe
+C:\Users\Latsuj\Documents\Lecteur\Lecteur\bin\Debug\Lecteur.pdb
+C:\Users\Latsuj\Documents\Lecteur\Lecteur\bin\Debug\Interop.WMPLib.dll
+C:\Users\Latsuj\Documents\Lecteur\Lecteur\obj\Debug\Interop.WMPLib.dll
+C:\Users\Latsuj\Documents\Lecteur\Lecteur\obj\Debug\Lecteur.csproj.ResolveComReference.cache
+C:\Users\Latsuj\Documents\Lecteur\Lecteur\obj\Debug\Lecteur.MainForm.resources
+C:\Users\Latsuj\Documents\Lecteur\Lecteur\obj\Debug\Lecteur.csproj.GenerateResource.Cache
