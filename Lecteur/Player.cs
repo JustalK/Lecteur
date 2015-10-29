@@ -24,6 +24,7 @@ namespace Lecteur
 		private List<FormMusic> listForms;
 		private Form windows;
 		private WMPLib.WindowsMediaPlayer wplayer;	
+		private System.Windows.Forms.TrackBar tb;
 		private int lastSong = -1;
 		static readonly System.Drawing.Color BACK_COLOR = System.Drawing.SystemColors.ButtonShadow;
 		const int DISTANCE_BETWEEN_MUSICS = 2;
@@ -35,13 +36,28 @@ namespace Lecteur
 			
 			System.Windows.Forms.Label tmp = this.windows.Controls["searchDirectory"]  as System.Windows.Forms.Label;
 			tmp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.searchDirectory);
+			
+			this.tb = this.windows.Controls["trackBar1"]  as System.Windows.Forms.TrackBar;
+			this.tb.ValueChanged += new System.EventHandler(this.trackBarChange);
+		}
+		
+		public void trackBarChange(object sender, System.EventArgs e) {
+			changeVolume(this.tb.Value);
+		}
+		
+		public void changeVolume(int i) {
+			if(lastSong != -1) {
+				this.wplayer.settings.volume = i;
+			}
 		}
 		
 		void searchDirectory(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
 			 FolderBrowserDialog fbd = new FolderBrowserDialog();
 			 DialogResult result = fbd.ShowDialog();
-			 newMusicsList(fbd.SelectedPath);
+			 if(fbd.SelectedPath != "") {
+			 	newMusicsList(fbd.SelectedPath);
+			 }
 		}
 		
 		public void newMusicsList(string path) {
@@ -66,6 +82,7 @@ namespace Lecteur
 			if(lastSong!=-1 && listMusics[lastSong].getState()==1) {
 				this.wplayer.controls.stop();	
 			}
+			lastSong = -1;
 			listMusics.Clear();
 			System.Windows.Forms.Panel tmp = this.windows.Controls["panContent"] as System.Windows.Forms.Panel;
 			tmp.Controls.Clear();
@@ -87,6 +104,7 @@ namespace Lecteur
 			this.wplayer = new WMPLib.WindowsMediaPlayer();
 			this.wplayer.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(wplayer_PlayStateChange);
 			this.wplayer.URL = listMusics[i].getPath();
+			this.wplayer.settings.volume = this.tb.Value;
 			this.wplayer.controls.play();			
 		}
 		
