@@ -32,6 +32,45 @@ namespace Lecteur
 			this.listMusics = new List<Music>();
 			this.listForms = new List<FormMusic>();
 			this.windows = form;
+			
+			System.Windows.Forms.Label tmp = this.windows.Controls["searchDirectory"]  as System.Windows.Forms.Label;
+			tmp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.searchDirectory);
+		}
+		
+		void searchDirectory(object sender, System.Windows.Forms.MouseEventArgs e)
+		{
+			 FolderBrowserDialog fbd = new FolderBrowserDialog();
+			 DialogResult result = fbd.ShowDialog();
+			 newMusicsList(fbd.SelectedPath);
+		}
+		
+		public void newMusicsList(string path) {
+			cleanMusicsList();
+			string[] files = Directory.GetFiles(@""+path, "*.mp3");
+			int positionY = 2;
+			int lengthBar = 0;
+			if(files.Length >=9) {
+				lengthBar = 20;
+			}
+			for (int i = 0; i < files.Length; i++)
+        	{
+				Music music = new Music(files[i]);
+				FormMusic form = new FormMusic(this,i,this.windows,getBasename(files[i]),2,positionY,lengthBar,BACK_COLOR);
+				addFormMusics(form);
+				addMusic(music);
+				positionY+=50+DISTANCE_BETWEEN_MUSICS;
+        	}
+		}
+		
+		public void cleanMusicsList() {
+			if(lastSong!=-1 && listMusics[lastSong].getState()==1) {
+				this.wplayer.controls.stop();	
+			}
+			listMusics.Clear();
+			System.Windows.Forms.Panel tmp = this.windows.Controls["panContent"] as System.Windows.Forms.Panel;
+			tmp.Controls.Clear();
+			listForms.Clear();
+			
 		}
 		
 		public void selected(int i) {

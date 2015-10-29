@@ -16,6 +16,7 @@ using Lecteur;
 using WMPLib;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 namespace Lecteur
 {
 	partial class MainForm
@@ -51,9 +52,11 @@ namespace Lecteur
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.panContent = new System.Windows.Forms.Panel();
+			this.searchDirectory = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -77,11 +80,18 @@ namespace Lecteur
 			// panContent
 			// 
 			this.panContent.AutoScroll = true;
-			this.panContent.VerticalScroll.Visible = true;
 			this.panContent.Location = new System.Drawing.Point(2, -1);
 			this.panContent.Name = "panContent";
 			this.panContent.Size = new System.Drawing.Size(580, 438);
 			this.panContent.TabIndex = 2;
+			// 
+			// searchDirectory
+			// 
+			this.searchDirectory.Image = ((System.Drawing.Image)(resources.GetObject("searchDirectory.Image")));
+			this.searchDirectory.Location = new System.Drawing.Point(4, 443);
+			this.searchDirectory.Name = "searchDirectory";
+			this.searchDirectory.Size = new System.Drawing.Size(31, 23);
+			this.searchDirectory.TabIndex = 0;
 			// 
 			// MainForm
 			// 
@@ -90,6 +100,7 @@ namespace Lecteur
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.ClientSize = new System.Drawing.Size(584, 466);
+			this.Controls.Add(this.searchDirectory);
 			this.Controls.Add(this.panContent);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
@@ -100,6 +111,7 @@ namespace Lecteur
 			this.Text = "Lecteur";
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.Label searchDirectory;
 		private System.Windows.Forms.Panel panContent;
 	}
 }
