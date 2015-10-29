@@ -110,11 +110,15 @@ namespace Lecteur
 		
 		public void createMusicsList() {
 			string[] files = Directory.GetFiles(@"./", "*.mp3");
-			int positionY = 0;
+			int positionY = 2;
+			int lengthBar = 0;
+			if(files.Length >=9) {
+				lengthBar = 20;
+			}
 			for (int i = 0; i < files.Length; i++)
         	{
 				Music music = new Music(files[i]);
-				FormMusic form = new FormMusic(this,i,this.windows,getBasename(files[i]),2,positionY,BACK_COLOR);
+				FormMusic form = new FormMusic(this,i,this.windows,getBasename(files[i]),2,positionY,lengthBar,BACK_COLOR);
 				addFormMusics(form);
 				addMusic(music);
 				positionY+=50+DISTANCE_BETWEEN_MUSICS;

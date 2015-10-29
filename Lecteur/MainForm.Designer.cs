@@ -53,6 +53,7 @@ namespace Lecteur
 		{
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
+			this.panContent = new System.Windows.Forms.Panel();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -72,7 +73,15 @@ namespace Lecteur
 			this.label2.Size = new System.Drawing.Size(100, 23);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Justal \"Latsuj\" K.";
-
+			// 
+			// panContent
+			// 
+			this.panContent.AutoScroll = true;
+			this.panContent.VerticalScroll.Visible = true;
+			this.panContent.Location = new System.Drawing.Point(2, -1);
+			this.panContent.Name = "panContent";
+			this.panContent.Size = new System.Drawing.Size(580, 438);
+			this.panContent.TabIndex = 2;
 			// 
 			// MainForm
 			// 
@@ -81,6 +90,7 @@ namespace Lecteur
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.ClientSize = new System.Drawing.Size(584, 466);
+			this.Controls.Add(this.panContent);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -90,5 +100,6 @@ namespace Lecteur
 			this.Text = "Lecteur";
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.Panel panContent;
 	}
 }

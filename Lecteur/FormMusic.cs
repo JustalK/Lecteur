@@ -24,7 +24,7 @@ namespace Lecteur
 		private System.Windows.Forms.Label title = new System.Windows.Forms.Label();
 		private System.ComponentModel.ComponentResourceManager rsc = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 		
-		public FormMusic(Player player,int index,Form form,string title,int positionX,int positionY,System.Drawing.Color color)
+		public FormMusic(Player player,int index,Form form,string title,int positionX,int positionY,int lengthBar,System.Drawing.Color color)
 		{
 			this.windows = form;
 			this.player = player;
@@ -32,11 +32,12 @@ namespace Lecteur
 			
 			this.button.BackColor = color;	
 			this.button.Image = ((System.Drawing.Image)(rsc.GetObject("play")));
-			this.button.Location = new System.Drawing.Point(530, positionY+2);
+			this.button.Location = new System.Drawing.Point(530-lengthBar, positionY+2);
 			this.button.MinimumSize = new System.Drawing.Size(40, 46);
 			this.button.MaximumSize = new System.Drawing.Size(40, 46);
 			button.Click += new System.EventHandler(this.playClick);
-			this.windows.Controls.Add(button);	
+			System.Windows.Forms.Panel tmp2 = this.windows.Controls["panContent"] as System.Windows.Forms.Panel;
+			tmp2.Controls.Add(this.button);		
 			
 			
 			this.title.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -48,12 +49,13 @@ namespace Lecteur
 			this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
 			this.title.ForeColor = System.Drawing.Color.Black;
 			this.title.Location = new System.Drawing.Point(positionX, positionY);
-			this.title.MinimumSize = new System.Drawing.Size(580, 50);
-			this.title.MaximumSize = new System.Drawing.Size(580, 50);
+			this.title.MinimumSize = new System.Drawing.Size(580-lengthBar, 50);
+			this.title.MaximumSize = new System.Drawing.Size(580-lengthBar, 50);
 			//title.Text = Path.GetFileName(files[cpt]);
 			this.title.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.title.Click += new System.EventHandler(this.selectedClick);
-			this.windows.Controls.Add(this.title);
+			System.Windows.Forms.Panel tmp = this.windows.Controls["panContent"] as System.Windows.Forms.Panel;
+			tmp.Controls.Add(this.title);
 		}
 		
 		public void selectedClick(object sender, System.EventArgs e)
