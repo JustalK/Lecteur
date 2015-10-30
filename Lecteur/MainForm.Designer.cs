@@ -58,7 +58,6 @@ namespace Lecteur
 			this.panContent = new System.Windows.Forms.Panel();
 			this.searchDirectory = new System.Windows.Forms.Label();
 			this.trackBar1 = new System.Windows.Forms.TrackBar();
-			this.MySign = new System.Windows.Forms.Label();
 			this.soundSign = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
 			this.SuspendLayout();
@@ -75,7 +74,7 @@ namespace Lecteur
 			// 
 			this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.label2.Location = new System.Drawing.Point(452, 446);
+			this.label2.Location = new System.Drawing.Point(480, 446);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(100, 23);
 			this.label2.TabIndex = 1;
@@ -99,20 +98,12 @@ namespace Lecteur
 			// 
 			// trackBar1
 			// 
-			this.trackBar1.Location = new System.Drawing.Point(67, 444);
+			this.trackBar1.Location = new System.Drawing.Point(70, 444);
 			this.trackBar1.Maximum = 100;
 			this.trackBar1.Name = "trackBar1";
-			this.trackBar1.Size = new System.Drawing.Size(390, 45);
+			this.trackBar1.Size = new System.Drawing.Size(413, 45);
 			this.trackBar1.TabIndex = 3;
 			this.trackBar1.Value = 50;
-			// 
-			// MySign
-			// 
-			this.MySign.Image = ((System.Drawing.Image)(resources.GetObject("MySign.Image")));
-			this.MySign.Location = new System.Drawing.Point(551, 442);
-			this.MySign.Name = "MySign";
-			this.MySign.Size = new System.Drawing.Size(30, 23);
-			this.MySign.TabIndex = 0;
 			// 
 			// soundSign
 			// 
@@ -130,16 +121,16 @@ namespace Lecteur
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.ClientSize = new System.Drawing.Size(584, 466);
 			this.Controls.Add(this.soundSign);
-			this.Controls.Add(this.MySign);
 			this.Controls.Add(this.trackBar1);
 			this.Controls.Add(this.searchDirectory);
 			this.Controls.Add(this.panContent);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
-			this.MinimizeBox = false;
 			this.Name = "MainForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Lecteur";
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
 			this.ResumeLayout(false);
@@ -149,7 +140,6 @@ namespace Lecteur
 		private System.Windows.Forms.Label searchDirectory;
 		private System.Windows.Forms.Panel panContent;
 		private System.Windows.Forms.TrackBar trackBar1;
-		private System.Windows.Forms.Label MySign;
 		private System.Windows.Forms.Label soundSign;
 	}
 }

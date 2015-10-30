@@ -25,8 +25,10 @@ namespace Lecteur
 		private Form windows;
 		private WMPLib.WindowsMediaPlayer wplayer;	
 		private System.Windows.Forms.TrackBar tb;
+		private System.Windows.Forms.Label sg;
 		private int lastSong = -1;
 		static readonly System.Drawing.Color BACK_COLOR = System.Drawing.SystemColors.ButtonShadow;
+		private System.ComponentModel.ComponentResourceManager rsc = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 		const int DISTANCE_BETWEEN_MUSICS = 2;
 		public Player(Form form)
 		{
@@ -39,6 +41,8 @@ namespace Lecteur
 			
 			this.tb = this.windows.Controls["trackBar1"]  as System.Windows.Forms.TrackBar;
 			this.tb.ValueChanged += new System.EventHandler(this.trackBarChange);
+			
+			this.sg = this.windows.Controls["soundSign"]  as System.Windows.Forms.Label;
 		}
 		
 		public void trackBarChange(object sender, System.EventArgs e) {
@@ -48,6 +52,11 @@ namespace Lecteur
 		public void changeVolume(int i) {
 			if(lastSong != -1) {
 				this.wplayer.settings.volume = i;
+			}
+			if(i==0) {
+				this.sg.Image = ((System.Drawing.Image)(rsc.GetObject("soundOff")));
+			} else {
+				this.sg.Image = ((System.Drawing.Image)(rsc.GetObject("soundSign.Image")));
 			}
 		}
 		

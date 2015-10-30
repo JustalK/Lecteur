@@ -58,6 +58,8 @@ namespace Lecteur
 			tmp.Controls.Add(this.title);
 		}
 		
+		
+		
 		public void selectedClick(object sender, System.EventArgs e)
 		{
 			player.selected(this.index);
