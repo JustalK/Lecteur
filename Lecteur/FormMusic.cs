@@ -49,8 +49,8 @@ namespace Lecteur
 			this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
 			this.title.ForeColor = System.Drawing.Color.Black;
 			this.title.Location = new System.Drawing.Point(positionX, positionY);
-			this.title.MinimumSize = new System.Drawing.Size(580-lengthBar, 50);
-			this.title.MaximumSize = new System.Drawing.Size(580-lengthBar, 50);
+			this.title.MinimumSize = new System.Drawing.Size(576-lengthBar, 50);
+			this.title.MaximumSize = new System.Drawing.Size(576-lengthBar, 50);
 			//title.Text = Path.GetFileName(files[cpt]);
 			this.title.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.title.Click += new System.EventHandler(this.selectedClick);

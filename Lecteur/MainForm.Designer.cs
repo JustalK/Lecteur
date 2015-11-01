@@ -17,6 +17,7 @@ using WMPLib;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Drawing;
 namespace Lecteur
 {
 	partial class MainForm
@@ -52,6 +53,7 @@ namespace Lecteur
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -113,6 +115,9 @@ namespace Lecteur
 			this.soundSign.Size = new System.Drawing.Size(31, 23);
 			this.soundSign.TabIndex = 0;
 			// 
+			// notifyIcon1
+			
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -142,4 +147,6 @@ namespace Lecteur
 		private System.Windows.Forms.TrackBar trackBar1;
 		private System.Windows.Forms.Label soundSign;
 	}
+	
+	
 }

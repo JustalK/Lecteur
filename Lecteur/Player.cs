@@ -75,7 +75,7 @@ namespace Lecteur
 			int positionY = 2;
 			int lengthBar = 0;
 			if(files.Length >=9) {
-				lengthBar = 20;
+				lengthBar = 18;
 			}
 			for (int i = 0; i < files.Length; i++)
         	{
